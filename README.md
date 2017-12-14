@@ -1,18 +1,22 @@
-Flasky搭建的校园信息交互网站
+Flasky搭建的博客系统
 =======
 ## 作品简介
-你是不是经常为自己错过辅导员的年级通知而苦恼，你是不是想找导师但找不到他的具体信息，你是不是想给后勤人员反映意见但找不到渠道，...?我们认为这些都是校园信息交互不对称造成的，针对这个问题，我们开发了一个智慧校园信息交互网站，它具有如下特点：
-1、辅导员、老师、学生、后勤人员都可以注册成为用户，大家可以相互关注。比如：我们可以很方便地在放假期间问食堂经理食堂开放时间。
-2、老师可以发布教学信息，辅导员可以发布教务信息，并且网站还可以把重要的信息聚集在一起，避免学生漏看通知。学生可以在下面评论点赞，为老师、辅导员提供信息反馈。比如：学校发布了一个政策，学生可以在下面发表自己意见和想法，为学校提供参考。
-3、学生自己也可以发布感想、心情，和同学、老师进行交流互动。比如：自己可以发表自己生活中遇到的困难，请老师、同学共同出主意。
-我们所做的这一切，都是为了校园的信息无障碍的流通。
+大三上学期开始，看了下分布式爬虫和分布式系统的内容，python用的挺爽。以前一直写java spring,快写傻了，有点烦，就看了下python的web框架flask，脚本语言嘛玩儿玩儿就好，不过真的好玩儿，像我这种前端白痴都能很快写出能让人类看懂的页面！后台代码也不知少了多少（放飞自我的时候，谁还会去考虑稳定性哈哈）
+
+上个月写的一个小比赛的作品不想浪费，精简改装了下，成了基于flask的轻博客系统，博客文章基于markdown语法，基本功能还是比较全的，详见功能介绍。最近主要准备考试，考试结束后会尽快加入前端美化、文章自定义标签、selenium自动化测试、阿里云部署步骤和刚看的nlp搜索功能。
+
+![图一](https://pan.baidu.com/s/1dFpSk5V)
 
 
-## 功能介绍
-#### 具体见功能介绍动图
+## 功能简介
+1.用户邮箱注册，登入登出，更改邮箱账户等。
+2.用户间关注、取关，设置个人信息、头像等。
+3.发布修改博文（markdown），发布评论，评论回复。
+4.协管员管理评论（屏蔽、删除）。
+5.管理员上天入地为所欲为。
 
 
-## 环境搭建（MacOS,Ubuntu16.04亲测有效)
+## 环境搭建（以MacOS,Ubuntu16.04为例，centOS6.7也亲测有效，在此不举例了)
 #### 1.创建virtualenv
 检查系统是否安装virtualenv:
 $virtualenv --version
@@ -21,12 +25,12 @@ $virtualenv --version
 $sudo easy_install virtualenv
 
 #### 2.下载Github代码
-$git clone https://github.com/miguelgrinberg/myf.git
+$git clone https://github.com/zyiwei/ywblog.git
 
-#### 3.在myf_master文件夹中创建虚拟环境
+#### 在ywblog文件夹中创建虚拟环境
 进入下载的文件目录:
-$cd myf
-或$cd myf_master
+$cd ywblog
+或$cd ywblog_master
 
 将创建的虚拟环境命名为venv:
 $virtualenv venv
@@ -43,18 +47,33 @@ $source venv/bin/activate
 
 (venv)$export MAIL_PASSWORD=<邮箱服务器密码>
 
-(venv)$export FLASKY_ADMIN=<管理员邮箱>
+(venv)$export FLASKY_ADMIN=<管理员邮箱(可以填你的邮箱)>
 
 (venv)$export FLASKY_MAIL_SENDER=<服务器发送邮件邮箱>
 
 #### 5.网站初始账户
 #####（1)管理员账户：
     邮箱：admin@example.com 密码：admin
-##### (2)协管员账户(6个)：
+##### (2)协管员账户(3个)：
     邮箱：mod1@example.com 密码：mod1
     邮箱：mod2@example.com 密码：mod2
-    ......
-    邮箱：mod3@example.com 密码：mod6
+    邮箱：mod3@example.com 密码：mod3
 
 #### 6.运行程序
 (venv)$python manage.py runserver
+
+#### 7.打开浏览器，前往地址http://127.0.0.1:5000/
+
+#### 注：
+若想试验更多功能，在数据库中生成虚用户和虚博文对象，如下：
+(venv)$python manage.py shell
+
+
+>>>User.generate_fake(100)
+
+>>>Post.generate_fake(100)
+
+>>>exit()
+
+这样，就人工向数据库中添加了100个虚拟用户和100个虚拟文章，打开浏览器看看吧！
+
