@@ -5,8 +5,7 @@ Flasky搭建的博客系统
 
 上个月写的一个小比赛的作品不想浪费，精简改装了下，成了基于flask的轻博客系统，博客文章基于markdown语法，基本功能还是比较全的，详见功能介绍。最近主要准备考试，考试结束后会尽快加入前端美化、文章自定义标签、selenium自动化测试、阿里云部署步骤和刚看的nlp搜索功能。
 
-![图一][1]
-   [1]: https://thumbnail0.baidupcs.com/thumbnail/2eb81afe687efb87b524657a6d37efa7?fid=1335854244-250528-889445863332395&time=1513252800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-Nbn9r48W7XyZLUnpaAcjZADKQ5g%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8067946394048852066&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video
+![图一](https://thumbnail0.baidupcs.com/thumbnail/2eb81afe687efb87b524657a6d37efa7?fid=1335854244-250528-889445863332395&time=1513252800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-Nbn9r48W7XyZLUnpaAcjZADKQ5g%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8067946394048852066&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video)
 
 
 ## 功能简介
