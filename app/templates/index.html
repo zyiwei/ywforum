@@ -33,8 +33,6 @@
         <li{% if show_followed=='0' %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">所有用户[All]</a></li>
         {% if current_user.is_authenticated %}
         <li{% if show_followed=='1' %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">关注者[Followers]</a></li>
-        <li{% if show_followed=='2' %} class="active"{% endif %}><a href="{{ url_for('.show_all_moderators') }}">协管员通知[Moderators]</a></li>
-		<li{% if show_followed=='3' %} class="active"{% endif %}><a href="{{ url_for('.show_followed_moderators') }}">关注协管员[Followed Moderators]</a></li>
 		<li{% if show_followed=='4' %} class="active"{% endif %}><a href="{{ url_for('.show_admin') }}">管理员广播[Admin]</a></li>
         {% endif %}
     </ul>
