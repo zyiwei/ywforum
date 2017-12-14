@@ -77,6 +77,7 @@ $source venv/bin/activate
 #### 注：
 若想试验更多功能，在数据库中生成虚用户和虚博文对象，如下：
 (venv)$python manage.py shell
+后在shell命令行下输入：
 
 
 >>>User.generate_fake(100)
