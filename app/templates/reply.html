@@ -1,0 +1,14 @@
+{% extends "ebase.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}YwBlog - 回复【reply】{% endblock %}
+
+{% block page_content %}
+
+<h4 id="comments">回复给{{ author.username }}的反馈：</h4>
+{% if current_user.can(Permission.COMMENT) %}
+<div class="comment-form">
+	{{ wtf.quick_form(form) }}
+</div>
+{% endif %}
+{% endblock %}

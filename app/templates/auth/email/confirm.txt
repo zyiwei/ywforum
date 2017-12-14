@@ -1,0 +1,15 @@
+亲爱的{{ user.username }}:
+	欢迎来到Flasky!
+	请点击下方的链接以确认你的账户：
+	{{ url_for('auth.confirm',token=token,_external=True) }}
+	感谢您的光临，祝您使用愉快！
+													————张奕伟
+
+Dear {{ user.username }}:
+	Welcome to Flasky!
+	To confirm your account please click on the link above.
+											Sinserely,
+													Yw Zhang
+
+注意：对这个电子邮件的回复没有被监控
+Note: replies to this email address are not monitored.

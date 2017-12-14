@@ -1,0 +1,24 @@
+{% extends "ebase.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}YwBlog - 信息【Post】{% endblock %}
+
+{% block page_content %}
+{% set if_body=1 %}
+{% include '_posts.html' %}
+{% set if_body=0 %}
+
+<h4 id="comments">评论【Comments】:</h4>
+{% if current_user.can(Permission.COMMENT) %}
+<div class="comment-form">
+	{{ wtf.quick_form(form) }}
+</div>
+{% endif %}
+{% include '_comments.html' %}
+{% if pagination %}
+<div class="pagination">
+	{{ macros.pagination_widget(pagination,'.post',fragment='#comments',id=posts[0].id) }}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+<p>亲爱的{{ user.username }}:</p>
+<p>	欢迎来到YwBlog!</p>
+<p>	请点击下方的链接以确认你的账户：</p>
+<p>	{{ url_for('auth.confirm',token=token,_external=True) }}</p>
+<p>	感谢您的光临，祝您使用愉快！</p>
+	<p>												————张奕伟
+</p>
+
+<p>Dear {{ user.username }}:</p>
+<p>		Welcome to YwBlog!</p>
+<p>		To confirm your account please click on the link above.</p>
+<p>												Sincerely,</p>
+<p>													Yw Zhang</p>
+
+<p><small>注意：对这个电子邮件的回复没有被监控</small></p>
+<p><small>Note: replies to this email address are not monitored.</small></p>

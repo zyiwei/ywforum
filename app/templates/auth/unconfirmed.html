@@ -1,0 +1,33 @@
+{% extends "ebase.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flasky - 危险用户【Unconfirmed】{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+	<h1>Hello,</h1>
+	{%  if current_user.is_authenticated %}
+		<h1>{{ current_user.username }}!</h1>
+	{% else %}
+		<h1>Stranger!</h1>
+	{% endif %}
+</div>
+
+<h2>请尽快按照指示确认您的账户</h2>
+<h4>Please Confirm Your Account(You have not confirm your account yet)</h4>
+
+<div>
+<p>请点击下方链接以确认您的账户，您会收到一封邮件，打开邮件中的链接以确认账户。</p>
+<p>Before you can access this site you need to confirm your account.Check your inbox,you should have received an email with a confirmation link.</p>
+
+<p>Need another confirmation email?</p>
+<p>
+	<a href="{{ url_for('auth.resend_confirmation') }}">
+		Click here to confirm your account.
+	</a>
+</p>
+
+<p>The Local date and time is {{ moment(current_time).format('LLL') }}</p>
+<p>That was {{ moment(current_time).fromNow(refresh=True) }}.</p>
+</div>
+{% endblock %}

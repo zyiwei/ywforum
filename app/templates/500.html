@@ -1,0 +1,12 @@
+{% extends "ebase.html" %}
+
+{% block title %}YwBlog - Internal Server Gone Wrong{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+	<h1>Server Gone Wrong</h1>
+    <h4>服务器走丢了</h4>
+</div>
+<p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
+<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
+{% endblock %}
