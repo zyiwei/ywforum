@@ -44,13 +44,15 @@ def index():
 		query=Post.query
 	if show_followed=='1':
 		query=current_user.followed_posts
+	'''
 	elif show_followed=='2':
 		query=db.session.query(Post).select_from(User).filter_by(role_id=1).join(Post,User.id==Post.author_id)
 	elif show_followed=='3':
 		query=current_user.followed_posts.filter(Post.role_id==1)
-	elif show_followed=='4':	
+	'''
+	if show_followed=='4':
 		query=db.session.query(Post).select_from(User).filter_by(role_id=2).join(Post,User.id==Post.author_id)
-	else:
+	if show_followed=='0':
 		query=Post.query
 	page=request.args.get('page',1,type=int)
 	pagination=query.order_by(Post.timestamp.desc()).paginate(page,per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],error_out=False)
@@ -267,7 +269,7 @@ def show_followed():
 	resp=make_response(redirect(url_for('.index')))
 	resp.set_cookie('show_followed','1',max_age=30*24*60*60)
 	return resp
-
+'''
 @main.route('/all-moderators')
 @login_required
 def show_all_moderators():
@@ -281,7 +283,7 @@ def show_followed_moderators():
 	resp=make_response(redirect(url_for('.index')))
 	resp.set_cookie('show_followed','3',max_age=30*24*60*60)
 	return resp
-
+'''
 @main.route('/admin')
 @login_required
 def show_admin():
