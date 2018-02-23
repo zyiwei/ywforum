@@ -1,0 +1,18 @@
+{% extends "ebase.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}Search Posts{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+<h1>文章搜索【Search Posts】</h1>
+</div>
+<div>
+    {{ wtf.quick_form(form) }}
+</div>
+
+{% if posts %}
+{% include '_posts.html' %}
+{% endif %}
+{% endblock %}
