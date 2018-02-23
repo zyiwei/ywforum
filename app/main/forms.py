@@ -11,6 +11,11 @@ class NameForm(Form):
 	submit=SubmitField('Submit/提交')
 
 
+class SearchForm(Form):
+	name=StringField('Which post do you want?/输入搜索的内容：',validators=[Required(),Length(1,256)])
+	submit=SubmitField('Submit/提交')
+
+
 class EditProfileForm(Form):
 	name=StringField('Real name/实名:',validators=[Length(0,64)])
 	avatar=FileField('avatar/头像:')
