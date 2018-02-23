@@ -3,8 +3,9 @@ from flask_bootstrap import Bootstrap
 from datetime import datetime
 from flask import render_template,session,redirect,url_for,flash,abort,request,current_app,make_response
 import os
+import re
 
-from .forms import EditProfileForm,EditProfileAdminForm,PostForm,CommentForm
+from .forms import EditProfileForm,EditProfileAdminForm,PostForm,CommentForm,SearchForm
 from .. import db
 from ..models import User,Post,Role,Comment,Follow,FollowComments
 from . import main
@@ -55,7 +56,7 @@ def index():
 	if show_followed=='0':
 		query=Post.query
 	page=request.args.get('page',1,type=int)
-	pagination=query.order_by(Post.timestamp.desc()).paginate(page,per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],error_out=False)
+	pagination=Post.query.order_by(Post.timestamp.desc()).paginate(page,per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],error_out=False)
 	posts=pagination.items
 	return render_template('index.html',form=form,posts=posts,current_time=datetime.utcnow(),pagination=pagination)
 
@@ -402,6 +403,23 @@ def moderate_users():
 	users=[{'timestamp':item.last_seen,'id':item.id,'username':item.username,'role':item.role.name,'avatar':item.avatar} for item in pagination.items]
 	return render_template('moderate_users.html',endpoint='.moderate_users',
 		pagination=pagination,users=users)
+
+
+
+
+@main.route('/search',methods=['GET','POST'])
+def search():
+	form=SearchForm()
+	results=[]
+	posts=Post.query.all()
+	if form.validate_on_submit():
+		name=form.name.data
+		for post in posts:
+			if re.search(name,post.header) or re.search(name,post.summary):
+				results.append(post)
+	return render_template('search.html',form=form,posts=results)
+
+
 
 
 @main.after_app_request
