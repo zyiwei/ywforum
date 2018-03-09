@@ -364,6 +364,7 @@ class AnonymousUser(AnonymousUserMixin):
 class Post(db.Model):
     __tablename__='posts'
     id=db.Column(db.Integer,primary_key=True)
+    category=db.Column(db.Integer)
     header=db.Column(db.Text)
     summary=db.Column(db.Text)
     body=db.Column(db.Text)
@@ -383,7 +384,7 @@ class Post(db.Model):
         user_count=User.query.count()
         for i in range(count):
             u=User.query.offset(randint(0,user_count-1)).first()
-            p=Post(header=forgery_py.lorem_ipsum.sentences(randint(1,3)),
+            p=Post(category=randint(1,5),header=forgery_py.lorem_ipsum.sentences(randint(1,3)),
                 summary=forgery_py.lorem_ipsum.sentences(randint(1,3)),
                 body=forgery_py.lorem_ipsum.sentences(randint(1,3)),
                 timestamp=forgery_py.date.date(True),
