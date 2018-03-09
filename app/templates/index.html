@@ -15,7 +15,7 @@
 	{% endif %}
 	</span>
 </div>
-
+ 
 <p>
 	<a href="{{ url_for('auth.change_email_request') }}">
 		点击这里更新邮箱地址/Click here to reset your email
@@ -34,7 +34,12 @@
         <li{% if show_followed=='0' %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">所有用户[All]</a></li>
         {% if current_user.is_authenticated %}
         <li{% if show_followed=='1' %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">关注者[Followers]</a></li>
-		<li{% if show_followed=='4' %} class="active"{% endif %}><a href="{{ url_for('.show_admin') }}">管理员广播[Admin]</a></li>
+        <li{% if show_followed=='2' %} class="active"{% endif %}><a href="{{ url_for('.show_eat_and_have_fun') }}">吃喝玩乐</a></li>
+        <li{% if show_followed=='3' %} class="active"{% endif %}><a href="{{ url_for('.show_linux') }}">操作系统</a></li>
+        <li{% if show_followed=='4' %} class="active"{% endif %}><a href="{{ url_for('.show_code') }}">产品开发</a></li>
+        <li{% if show_followed=='5' %} class="active"{% endif %}><a href="{{ url_for('.show_learning') }}">机器学习</a></li>
+        <li{% if show_followed=='6' %} class="active"{% endif %}><a href="{{ url_for('.show_activity') }}">学校活动</a></li>
+		<li{% if show_followed=='7' %} class="active"{% endif %}><a href="{{ url_for('.show_admin') }}">管理员广播[Admin]</a></li>
         {% endif %}
     </ul>
 </div>
