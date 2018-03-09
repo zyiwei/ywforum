@@ -49,12 +49,17 @@ class EditProfileAdminForm(Form):
 			raise ValidationError('此邮箱地址已被使用/Email already in use!')
 
 
-
+ 
 class PostForm(Form):
+	category=SelectField("帖子类别:",coerce=int)
 	header=StringField("题目:",validators=[Required(),Length(1,50)])
 	summary=StringField("摘要:",validators=[Required(),Length(1,200)])
 	body=PageDownField("内容:",validators=[Required()])
 	submit=SubmitField('Submit/提交')
+
+	def __init__(self,*args,**kwargs):
+		super(PostForm,self).__init__(*args,**kwargs)
+		self.category.choices=[(1,"吃喝玩乐"),(2,"操作系统"),(3,"产品开发"),(4,"机器学习"),(5,"学校活动")]
 
 
 class CommentForm(Form):
