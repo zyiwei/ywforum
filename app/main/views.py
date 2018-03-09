@@ -35,31 +35,48 @@ def server_shutdown():
 def index():
 	form=PostForm()
 	if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
-		post=Post(header=form.header.data,summary=form.summary.data,body=form.body.data,author=current_user._get_current_object(),role=current_user.role)
+		post=Post(category=form.category.data,header=form.header.data,summary=form.summary.data,body=form.body.data,author=current_user._get_current_object(),role=current_user.role)
 		db.session.add(post)
 		return redirect(url_for('.index'))
-	show_followed='0'
+	'''show_followed='0'''
 	if current_user.is_authenticated:
 		show_followed=request.cookies.get('show_followed')
-	else:
 		query=Post.query
-	if show_followed=='1':
+	else:
+		flash('haha')
+		query=Post.query
+	if current_user.is_authenticated and show_followed=='1':
+		flash('111111')
 		query=current_user.followed_posts
 	'''
 	elif show_followed=='2':
 		query=db.session.query(Post).select_from(User).filter_by(role_id=1).join(Post,User.id==Post.author_id)
-	elif show_followed=='3':
-		query=current_user.followed_posts.filter(Post.role_id==1)
+	'''
+	if current_user.is_authenticated and show_followed=='2':
+		query=Post.query.filter_by(category='1')
+	if current_user.is_authenticated and show_followed=='3':
+		query=Post.query.filter_by(category='2')
+	if current_user.is_authenticated and show_followed=='4':
+		query=Post.query.filter_by(category='3')
+	if current_user.is_authenticated and show_followed=='5':
+		query=Post.query.filter_by(category='4')
+	if current_user.is_authenticated and show_followed=='6':
+		query=Post.query.filter_by(category='5')
+	if current_user.is_authenticated and show_followed=='7':
+		query=Post.query.filter_by(role_id=2)
 	'''
 	if show_followed=='4':
+		flash('4')
 		query=db.session.query(Post).select_from(User).filter_by(role_id=2).join(Post,User.id==Post.author_id)
-	if show_followed=='0':
+	'''
+	if current_user.is_authenticated and show_followed=='0':
 		query=Post.query
+
 	page=request.args.get('page',1,type=int)
-	pagination=Post.query.order_by(Post.timestamp.desc()).paginate(page,per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],error_out=False)
+	pagination=query.order_by(Post.timestamp.desc()).paginate(page,per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],error_out=False)
 	posts=pagination.items
 	return render_template('index.html',form=form,posts=posts,current_time=datetime.utcnow(),pagination=pagination)
-
+ 
 
 
 @main.route('/replycomments/<username>')
@@ -186,12 +203,14 @@ def edit(id):
 		abort(403)
 	form=PostForm()
 	if form.validate_on_submit():
+		post.category=form.category.data
 		post.header=form.header.data
 		post.summary=form.summary.data
 		post.body=form.body.data
 		db.session.add(post)
 		flash('文章已更新/The post has been updated.')
 		return redirect(url_for('.post',id=post.id))
+	form.category.data=post.category
 	form.header.data=post.header
 	form.summary.data=post.summary
 	form.body.data=post.body
@@ -271,25 +290,60 @@ def show_followed():
 	resp.set_cookie('show_followed','1',max_age=30*24*60*60)
 	return resp
 '''
-@main.route('/all-moderators')
+@main.route('/follow-me')
 @login_required
-def show_all_moderators():
+def follow_me():
 	resp=make_response(redirect(url_for('.index')))
 	resp.set_cookie('show_followed','2',max_age=30*24*60*60)
 	return resp
 
-@main.route('/followed-moderators')
+@main.route('/follow-me-post')
 @login_required
-def show_followed_moderators():
+def follow_post():
 	resp=make_response(redirect(url_for('.index')))
 	resp.set_cookie('show_followed','3',max_age=30*24*60*60)
 	return resp
 '''
+@main.route('/eat-and-have-fun')
+@login_required
+def show_eat_and_have_fun():
+	resp=make_response(redirect(url_for('.index')))
+	resp.set_cookie('show_followed','2',max_age=30*24*60*60)
+	return resp
+
+@main.route('/linux')
+@login_required
+def show_linux():
+	resp=make_response(redirect(url_for('.index')))
+	resp.set_cookie('show_followed','3',max_age=30*24*60*60)
+	return resp
+
+@main.route('/code')
+@login_required
+def show_code():
+	resp=make_response(redirect(url_for('.index')))
+	resp.set_cookie('show_followed','4',max_age=30*24*60*60)
+	return resp
+
+@main.route('/machine-learning')
+@login_required
+def show_learning():
+	resp=make_response(redirect(url_for('.index')))
+	resp.set_cookie('show_followed','5',max_age=30*24*60*60)
+	return resp
+
+@main.route('/activity')
+@login_required
+def show_activity():
+	resp=make_response(redirect(url_for('.index')))
+	resp.set_cookie('show_followed','6',max_age=30*24*60*60)
+	return resp
+
 @main.route('/admin')
 @login_required
 def show_admin():
 	resp=make_response(redirect(url_for('.index')))
-	resp.set_cookie('show_followed','4',max_age=30*24*60*60)
+	resp.set_cookie('show_followed','7',max_age=30*24*60*60)
 	return resp
 
 
