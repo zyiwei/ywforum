@@ -49,7 +49,7 @@ class EditProfileAdminForm(Form):
 			raise ValidationError('此邮箱地址已被使用/Email already in use!')
 
 
- 
+
 class PostForm(Form):
 	category=SelectField("帖子类别:",coerce=int)
 	header=StringField("题目:",validators=[Required(),Length(1,50)])
