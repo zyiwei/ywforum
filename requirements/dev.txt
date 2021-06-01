@@ -2,4 +2,4 @@
 coverage==4.4.1
 httpie==0.9.9
 requests==2.18.2
-urllib3==1.22
+urllib3==1.26.5
